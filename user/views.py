@@ -36,8 +36,15 @@ def login(request):
     
 
 def home(request):
-    if request.user.is_authenticated:
+    # if request.user.is_authenticated:
+    #     return render(request, 'home.html')
+    # else:
+    #     return redirect('user:login')
+
+    user = request.user
+    users = User.objects.all()
+    if user in users:
         return render(request, 'home.html')
-    else:
+    elif request.user is not users:
         return redirect('user:login')
         
