@@ -36,11 +36,8 @@ def login(request):
     
 
 def home(request):
-    user = request.POST.get(request.user)
-    if user is None:
-        return redirect('user:login')
+    if request.user.is_authenticated:
+        return render(request, 'home.html')
     else:
-        context = {
-            "user": user
-        }
-        return render(request, 'home.html', context)
+        return redirect('user:login')
+        
