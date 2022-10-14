@@ -36,7 +36,7 @@ def login(request):
     
 
 def home(request):
-    user = request.user
+    user = request.POST.get(request.user)
     if user is None:
         return redirect('user:login')
     else:
