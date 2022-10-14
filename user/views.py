@@ -35,9 +35,12 @@ def login(request):
             return redirect('user:signup')
     
 
-def home(request, username):
-    user = User.objects.get(username=username)
+def home(request):
+    user = request.user
     if user is None:
         return redirect('user:login')
     else:
-        return render(request, 'home.html')
+        context = {
+            "user": user
+        }
+        return render(request, 'home.html', context)
